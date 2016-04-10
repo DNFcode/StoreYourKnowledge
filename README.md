@@ -12,3 +12,4 @@ For today my list of stuff i am going to implement or just use in this project:
 3. Celery + Redis (for some file uploads? But i just need to test it out :D )
 4. PostgreSQL (as main DB, also find need to find some nice usage for this DB)
 5. ElasticSearch (for full-text search... yeah.. that's it)
+6. Google auth and github auth
