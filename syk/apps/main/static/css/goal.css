@@ -1,0 +1,11 @@
+.horizontal-progress{
+    width: 100%;
+    height: 8px;
+    top: -8px;
+    position: relative;
+}
+
+.goals-description{
+    font-size: 16px;
+    margin-bottom: 40px;
+}

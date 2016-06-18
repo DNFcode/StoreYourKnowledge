@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static from staticfiles %}
+
+{% block head %}
+    <link href="{% static "css/create.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="vertical-center">
+        <div class="container">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2>An account already exists with this e-mail address. Please sign in to that account.</h2>
+            </div>
+        </div>
+    </div>
+{% endblock %}

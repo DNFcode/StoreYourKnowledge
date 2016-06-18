@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+
+{% block head %}
+    <link href="{% static "css/index.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="col-lg-3">
+        <ul class="list-group">
+            <li class="list-group-item">
+                1
+            </li>
+            <li class="list-group-item">
+                2
+            </li>
+            <li class="list-group-item">
+                3
+            </li>
+        </ul>
+    </div>
+    <div class="col-lg-9">
+
+    </div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{% static "lib/bootstrap/dist/css/bootstrap.min.css" %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    {% block head %}{% endblock %}
+    <title>{% block title %}Store your knowledge{% endblock %}</title>
+</head>
+
+<body>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="{% block navbar-container %}container{% endblock %}">
+            <div class="navbar-header">
+                <a href="{% url 'index' %}" class="navbar-brand">Store Your Knowledge</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    {% if request.user.is_authenticated %}
+                        <li><a href="{% url 'main:home' %}">{{ request.user.username }}</a></li>
+                        <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url 'users:logout' %}">Log out</a></li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li class="nav-icon"><a href='{% url 'github_login' %}'><i class="fa fa-github"></i></a></li>
+                        <li class="nav-icon"><a href='{% url 'google_login' %}'><i class="fa fa-google"></i></a></li>
+                        <li><a href='{% url 'users:create' %}'>Sign up</a></li>
+                        <li><a href='{% url 'users:login' %}'>Log in</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% block content %}{% endblock %}
+
+    <script src="{% static "lib/jquery/dist/jquery.min.js" %}"></script>
+    <script src="{% static "lib/bootstrap/dist/js/bootstrap.min.js" %}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>
