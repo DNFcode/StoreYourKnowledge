@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+
+{% block head %}
+    <link href="{% static "css/home.css" %}" rel="stylesheet">
+    <link href="{% static "css/goal.css" %}" rel="stylesheet">
+    <link href="{% static "css/tasks.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block navbar-container %}container-fluid{% endblock %}
+
+{% block scripts %}
+{#    <script src="{% static "js/goals.js" %}"></script>#}
+{#    <script src="{% static "js/goal.js" %}"></script>#}
+{#    <script src="{% static "lib/progressbar.js/dist/progressbar.min.js" %}"></script>#}
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row content">
+            {% include "nav_goal.html" with active="tasks" %}
+
+            <div class="col-md-10 no-padding">
+                <div class="row text-center goals-header">
+                    <h1 class="subject">
+                        Redis
+{#                        {{ object.name }}#}
+                    </h1>
+                </div>
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="task">
+                                    <div class="task-title">Task</div>
+                                    <div class="task-date">12.12.2012</div>
+                                    <div class="task-description">
+                                        In computer science, a queue is a particular
+                                        kind of data type in which the entities in the
+                                        collection are kept in order and the principal
+                                        operations on the collection are the addition of
+                                        entities to the rear terminal position (enqueue or push),
+                                        and reata structure, the first element
+                                        added to the queue will be the first one to be removed. This is
+                                        equivalent to the requirement that once a new element is added,
+                                        all elements that were added
+                                        before have to be removed before the new element can be removed.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="task">
+                                    <div class="task-title">Task</div>
+                                    <div class="task-date">12.12.2012</div>
+                                    <div class="task-description">
+                                        In computer science, a queue is a particular
+                                        kind of data type in which the entities in the
+                                        collection are kept in order and the principal
+                                        operations on the collection are the addition of
+                                        entities to the rear terminal position (enqueue or push),
+                                        and reata structure, the first element
+                                        added to the queue will be the first one to be removed. This is
+                                        equivalent to the requirement that once a new element is added,
+                                        all elements that were added
+                                        before have to be removed before the new element can be removed.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="task">
+                                    <div class="task-title">Task</div>
+                                    <div class="task-date">12.12.2012</div>
+                                    <div class="task-description">
+                                        In computer science, a queue is a particular
+                                        kind of data type in which the entities in the
+                                        collection are kept in order and the principal
+                                        operations on the collection are the addition of
+                                        entities to the rear terminal position (enqueue or push),
+                                        and removal of entities from the front terminal position
+                                        (dequeue or pop). This makes the queue a First-In-First-Out
+                                        (FIFO) data structure. In a FIFO data structure, the first element
+                                        added to the queue will be the first one to be removed. This is
+                                        equivalent to the requirement that once a new element is added,
+                                        all elements that were added
+                                        before have to be removed before the new element can be removed.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="task">
+                                    <div class="task-title">Task</div>
+                                    <div class="task-date">12.12.2012</div>
+                                    <div class="task-description">
+                                        In computer science, a queue is a particular
+                                        kind of data type in which the entities in the
+                                        collection are kept in order and the principal
+                                        operations on the collection are the addition of
+                                        entities to the rear terminal position (enqueue or push),
+                                        and removal of entities from the front terminal position
+                                        (dequeue or pop). This makes the queue a First-In-First-Out
+                                        (FIFO) data structure. In a FIFO data structure, the first element
+                                        added to the queue will be the first one to be removed. This is
+                                        equivalent to the requirement that once a new element is added,
+                                        all elements that were added
+                                        before have to be removed before the new element can be removed.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

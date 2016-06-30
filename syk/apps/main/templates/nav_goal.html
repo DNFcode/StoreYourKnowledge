@@ -1,0 +1,31 @@
+<div class="col-md-2 left-sidebar fixed">
+    <nav class="list-group list-smaller">
+        <a class="list-group-item {% if active == 'goal' %} active {% endif %}"
+           href="{% url 'main:goal' goal_pk=view.kwargs.goal_pk %}">
+            Goal
+        </a>
+        <a class="list-group-item {% if active == 'tasks' %} active {% endif %}"
+           href="{% url 'main:tasks' goal_pk=view.kwargs.goal_pk %}">
+            Tasks
+        </a>
+        <a class="list-group-item {% if active == 'notes' %} active {% endif %}">
+            Notes
+        </a>
+        <a class="list-group-item {% if active == 'code_examples' %} active {% endif %}">
+            Code examples
+        </a>
+        <a class="list-group-item {% if active == 'books' %} active {% endif %}">
+            Books and articles
+        </a>
+    </nav>
+    <div class="panel panel-info tips">
+      <div class="panel-heading">
+        <h3 class="panel-title">Useful tips</h3>
+      </div>
+      <div class="panel-body">
+        Don't forget to update your goals. We will notify you if you are missing something.
+      </div>
+    </div>
+</div>
+<div class="col-md-2 left-sidebar">
+</div>

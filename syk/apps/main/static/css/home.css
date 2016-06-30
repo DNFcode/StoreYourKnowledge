@@ -5,6 +5,11 @@
     border-right: 1px solid #dddddd;
 }
 
+.fixed{
+    position: fixed;
+    z-index: 100;
+}
+
 .list-smaller .list-group-item{
     margin-bottom: 0;
     border: 0;
@@ -39,12 +44,14 @@
 
 .goal-progress-bar .subject{
     font-size: 18px;
+    color: #666666;
 }
 
 .goal-progress-bar{
     margin-bottom: 30px;
     padding: 10px;
     cursor: pointer;
+    text-decoration: none !important;
 }
 
 .goal-progress-bar:hover{

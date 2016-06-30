@@ -1,0 +1,15 @@
+.task{
+    border-radius: 20px;
+    padding: 30px;
+    margin: 10px;
+    background: aliceblue;
+}
+
+.task-title{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.task-date{
+    border-bottom: 1px solid #dddddd;
+}

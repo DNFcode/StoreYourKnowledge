@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static from staticfiles %}
+
+{% block head %}
+    <link href="{% static "css/home.css" %}" rel="stylesheet">
+    <link href="{% static "css/goal.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block navbar-container %}container-fluid{% endblock %}
+
+{% block scripts %}
+{#    <script src="{% static "js/goals.js" %}"></script>#}
+{#    <script src="{% static "js/goal.js" %}"></script>#}
+{#    <script src="{% static "lib/progressbar.js/dist/progressbar.min.js" %}"></script>#}
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row content">
+            {% include "nav_goal.html" with active="goal" %}
+
+            <div class="col-md-10 no-padding">
+                <div class="col-md-8 col-md-offset-2">
+                    <h2 class="text-center">Create new goal</h2>
+                    <form class="form-horizontal" method="post">
+                        {% crispy form %}
+                        <div class="form-group">
+                            <div class="aab controls col-lg-2"></div>
+                            <div class="controls col-lg-8">
+                            <input type="submit" name="submit" value="Create" class="btn btn-primary"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
