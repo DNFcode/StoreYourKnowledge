@@ -1,11 +1,9 @@
-{% extends "base.html" %}
+{% extends "app_base.html" %}
 {% load static from staticfiles %}
 
 {% block head %}
     <link href="{% static "css/home.css" %}" rel="stylesheet">
 {% endblock %}
-
-{% block navbar-container %}container-fluid{% endblock %}
 
 {% block scripts %}
     <script src="{% static "js/goals.js" %}"></script>
@@ -13,27 +11,23 @@
     <script src="{% static "lib/progressbar.js/dist/progressbar.min.js" %}"></script>
 {% endblock %}
 
-{% block content %}
-    <div class="container-fluid">
-        <div class="row content">
-            {% include "nav_home.html" with active="goals" %}
+{% block nav %}
+    {% include "nav_home.html" with active="goals" %}
+{% endblock %}
 
-            <div class="col-md-10 no-padding">
-                <div class="row text-center goals-header">
-                    <h1>Current goals</h1>
-                </div>
-                <div class="goals row text-center">
-                    {% for goal in object_list %}
-                    <a class="goal-progress-bar col-md-3" href="{% url 'main:goal' goal_pk=goal.pk %}">
-                        <div class="progress-bar-container">0.6</div>
-                        <div class="subject">{{ goal.name }}</div>
-                    </a>
-                    {% endfor %}
-                </div>
-                <div class="row text-center goals-add">
-                    <a href="{% url 'main:goal-create' %}" class="btn bg-primary">Add new goal</a>
-                </div>
-            </div>
-        </div>
+{% block main-content %}
+    <div class="row text-center goals-header">
+        <h1>Current goals</h1>
+    </div>
+    <div class="goals row text-center">
+        {% for goal in object_list %}
+        <a class="goal-progress-bar col-md-3" href="{% url 'main:goal' goal_pk=goal.pk %}">
+            <div class="progress-bar-container">0.6</div>
+            <div class="subject">{{ goal.name }}</div>
+        </a>
+        {% endfor %}
+    </div>
+    <div class="row text-center goals-add">
+        <a href="{% url 'main:goal-create' %}" class="btn bg-primary">Add new goal</a>
     </div>
 {% endblock %}

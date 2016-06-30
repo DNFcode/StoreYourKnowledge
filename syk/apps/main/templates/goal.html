@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "app_base.html" %}
 {% load static from staticfiles %}
 
 {% block head %}
@@ -6,66 +6,60 @@
     <link href="{% static "css/goal.css" %}" rel="stylesheet">
 {% endblock %}
 
-{% block navbar-container %}container-fluid{% endblock %}
-
 {% block scripts %}
     <script src="{% static "js/goals.js" %}"></script>
     <script src="{% static "js/goal.js" %}"></script>
     <script src="{% static "lib/progressbar.js/dist/progressbar.min.js" %}"></script>
 {% endblock %}
 
-{% block content %}
-    <div class="container-fluid">
-        <div class="row content">
-            {% include "nav_goal.html" with active="goal" %}
+{% block nav %}
+    {% include "nav_goal.html" with active="goal" %}
+{% endblock %}
 
-            <div class="col-md-10 no-padding">
-                <div class="row text-center goals-header">
-                    <div class="horizontal-progress">0.6</div>
-                    <h1 class="subject">
-                        <span class="subject-name">{{ object.name }}</span>
-                        <a href="{% url 'main:goal-update' goal_pk=view.kwargs.goal_pk %}"><i class="fa fa-pencil icon"></i></a>
-                        <a href="{% url 'main:goal-delete' goal_pk=view.kwargs.goal_pk %}"><i class="fa fa-trash-o icon"></i></a>
-                    </h1>
-                </div>
-                <div class="row goals-description col-md-6 col-md-offset-3">
-                    {{ object.description }}
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="col-header text-center">
-                            <h4>Tasks</h4>
-                        </div>
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Task title</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Coolest task you have ever seen</td>
-                                </tr>
-                                <tr>
-                                    <td>Coolest task you have ever seen</td>
-                                </tr>
-                                <tr>
-                                    <td>Coolest task you have ever seen</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="col-header text-center">
-                            <h4>Code examples</h4>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="col-header text-center">
-                            <h4>Books and articles</h4>
-                        </div>
-                    </div>
-                </div>
+{% block main-content %}
+    <div class="row text-center goals-header">
+        <div class="horizontal-progress">0.6</div>
+        <h1 class="subject">
+            <span class="subject-name">{{ object.name }}</span>
+            <a href="{% url 'main:goal-update' goal_pk=view.kwargs.goal_pk %}"><i class="fa fa-pencil icon"></i></a>
+            <a href="{% url 'main:goal-delete' goal_pk=view.kwargs.goal_pk %}"><i class="fa fa-trash-o icon"></i></a>
+        </h1>
+    </div>
+    <div class="row goals-description col-md-6 col-md-offset-3">
+        {{ object.description }}
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="col-header text-center">
+                <h4>Tasks</h4>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Task title</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Coolest task you have ever seen</td>
+                    </tr>
+                    <tr>
+                        <td>Coolest task you have ever seen</td>
+                    </tr>
+                    <tr>
+                        <td>Coolest task you have ever seen</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-4">
+            <div class="col-header text-center">
+                <h4>Code examples</h4>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="col-header text-center">
+                <h4>Books and articles</h4>
             </div>
         </div>
     </div>
