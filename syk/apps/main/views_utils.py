@@ -1,11 +1,10 @@
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.urlresolvers import reverse_lazy, reverse
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseForbidden, Http404
-from django.views.generic import CreateView, UpdateView, DeleteView, TemplateView
+from django.views.generic import CreateView, UpdateView, DeleteView, TemplateView, ListView, DetailView
 from django.views.generic.detail import SingleObjectMixin
 
-from syk.apps.main.forms import GoalForm
-from syk.apps.main.models import Goal, Book
+from syk.apps.main.models import Goal
 
 
 class PermissionsMixin(object):
@@ -37,6 +36,18 @@ class GoalPermissionMixin(PermissionsMixin):
         return self.permission_object.owner == request.user
 
 
+class BaseGoalChildListView(ListView, GoalPermissionMixin):
+    def get_queryset(self):
+        if self.queryset is None:
+            return self.model.objects.filter(goal=self.get_permission_object())
+        else:
+            return super(BaseGoalChildListView, self).get_queryset()
+
+
+class BaseGoalChildDetailView(DetailView, GoalPermissionMixin):
+    pass
+
+
 class BaseGoalChildCreateView(CreateView, GoalPermissionMixin):
     def form_valid(self, form):
         form.instance.goal_id = self.kwargs['goal_pk']
@@ -52,9 +63,3 @@ class BaseGoalChildUpdateView(UpdateView, GoalPermissionMixin):
 
 class BaseGoalChildDeleteView(DeleteView, GoalPermissionMixin):
     pass
-
-
-class BaseGoalChildObjectView(SingleObjectMixin, TemplateView, GoalPermissionMixin):
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        return super(BaseGoalChildObjectView, self).get(request, *args, **kwargs)

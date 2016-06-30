@@ -1,32 +1,37 @@
 from django.core.urlresolvers import reverse_lazy, reverse
-from django.views.generic import CreateView, UpdateView, DeleteView, TemplateView
-from django.views.generic.detail import SingleObjectMixin
+from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 
 from forms import GoalForm, BookForm
 from models import Goal, Book
 from syk.apps.main.views_utils import GoalPermissionMixin
-from syk.apps.main.views_utils import BaseGoalChildCreateView, BaseGoalChildDeleteView, BaseGoalChildObjectView, BaseGoalChildUpdateView
-
-
-class HomeView(TemplateView):
-    template_name = 'home.html'
-
-    def get_goals(self):
-        return Goal.objects.filter(owner=self.request.user)
-
-    def get_context_data(self, **kwargs):
-        kwargs['goals'] = self.get_goals()
-        return super(HomeView, self).get_context_data(**kwargs)
+from syk.apps.main.views_utils import BaseGoalChildCreateView, BaseGoalChildDeleteView, BaseGoalChildUpdateView, \
+    BaseGoalChildListView, BaseGoalChildDetailView
 
 
 # goals
+class HomeView(ListView):
+    template_name = 'home.html'
+
+    def get_queryset(self):
+        if self.queryset is None:
+            return Goal.objects.filter(owner=self.request.user)
+        else:
+            return super(HomeView, self).get_queryset()
+
+
+class GoalView(DetailView, GoalPermissionMixin):
+    template_name = 'goal.html'
+    model = Goal
+    pk_url_kwarg = 'goal_pk'
+
+
 class GoalCreateView(CreateView):
     success_url = reverse_lazy('main:home')
     prefix = 'goal'
     form_class = GoalForm
     model = Goal
     template_name = 'goal_create_form.html'
-    
+
     def form_valid(self, form):
         form.instance.owner = self.request.user
         return super(GoalCreateView, self).form_valid(form)
@@ -51,20 +56,35 @@ class GoalDeleteView(DeleteView, GoalPermissionMixin):
     pk_url_kwarg = 'goal_pk'
 
 
-class GoalView(SingleObjectMixin, TemplateView, GoalPermissionMixin):
-    template_name = 'goal.html'
-    model = Goal
-    object = None
-    pk_url_kwarg = 'goal_pk'
-
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        return super(GoalView, self).get(request, *args, **kwargs)
-
-
 # books
+class BookListView(BaseGoalChildListView):
+    model = Book
+    template_name = 'books.html'
+
+
+class BookDetailView(BaseGoalChildDetailView):
+    model = Book
+    template_name = 'books.html'
+
+
 class BookCreateView(BaseGoalChildCreateView):
+    success_url = reverse_lazy('main:books')
     prefix = 'book'
     form_class = BookForm
     model = Book
-    template_name = "book_create_form.html"
+    template_name = 'book_create_form.html'
+
+
+class BookUpdateView(BaseGoalChildUpdateView):
+    prefix = 'book'
+    form_class = BookForm
+    model = Book
+    template_name = 'book_update_form.html'
+    pk_url_kwarg = 'book_pk'
+
+
+class BookDeleteView(BaseGoalChildDeleteView):
+    success_url = reverse_lazy('main:books')
+    model = Book
+    template_name = 'book_confirm_delete.html'
+    pk_url_kwarg = 'book_pk'

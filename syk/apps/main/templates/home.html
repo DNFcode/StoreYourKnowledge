@@ -23,7 +23,7 @@
                     <h1>Current goals</h1>
                 </div>
                 <div class="goals row text-center">
-                    {% for goal in goals %}
+                    {% for goal in object_list %}
                     <a class="goal-progress-bar col-md-3" href="{% url 'main:goal' goal_pk=goal.pk %}">
                         <div class="progress-bar-container">0.6</div>
                         <div class="subject">{{ goal.name }}</div>
