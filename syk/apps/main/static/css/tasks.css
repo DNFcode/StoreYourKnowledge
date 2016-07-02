@@ -1,15 +1,23 @@
-.task{
+.goal-child{
     border-radius: 20px;
     padding: 30px;
     margin: 10px;
-    background: aliceblue;
+    background: rgba(191, 207, 255, 0.1);
+    transition: background-color 0.25s ease-out;
+    /*color: #666666;*/
+    /*text-decoration: none !important;*/
 }
 
-.task-title{
+.goal-child:hover{
+    background-color: rgba(191, 207, 255, 0.3);
+    border-radius: 20px;
+}
+
+.goal-child-title{
     font-size: 16px;
     font-weight: 600;
 }
 
-.task-date{
+.goal-child-date{
     border-bottom: 1px solid #dddddd;
 }

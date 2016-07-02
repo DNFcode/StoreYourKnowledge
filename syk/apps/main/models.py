@@ -17,7 +17,7 @@ class Task(models.Model):
     goal = models.ForeignKey(Goal)
     title = models.CharField(max_length=200)
     is_done = models.BooleanField(default=False)
-    created = models.DateField(auto_created=True)
+    created = models.DateField(auto_now_add=True)
 
     CHOICES = (
         ('CE', 'Code example'),
@@ -52,7 +52,7 @@ class Task(models.Model):
 
 class CodeExample(models.Model):
     goal = models.ForeignKey(Goal)
-    created = models.DateField(auto_created=True)
+    created = models.DateField(auto_now_add=True)
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     code = models.TextField()
@@ -60,7 +60,7 @@ class CodeExample(models.Model):
 
 class Book(models.Model):
     goal = models.ForeignKey(Goal)
-    created = models.DateField(auto_created=True)
+    created = models.DateField(auto_now_add=True)
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     pages = models.PositiveIntegerField(blank=True, null=True)
@@ -69,6 +69,6 @@ class Book(models.Model):
 
 class Note(models.Model):
     goal = models.ForeignKey(Goal)
-    created = models.DateField(auto_created=True)
+    created = models.DateField(auto_now_add=True)
     title = models.CharField(max_length=200)
     text = models.TextField()

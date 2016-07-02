@@ -1,10 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "app_base.html" %}
+{% load static from staticfiles %}
 
-</body>
-</html>
+{% block head %}
+    <link href="{% static "css/home.css" %}" rel="stylesheet">
+    <link href="{% static "css/goal.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block nav %}
+    {% include "nav_goal.html" with active="books" %}
+{% endblock %}
+
+{% block main-content %}
+    <div class="row text-center goals-header">
+        <h1 class="subject">
+            <span class="subject-name">{{ object.name }}</span>
+            <a href="{% url 'main:book-update' goal_pk=view.kwargs.goal_pk book_pk=object.pk %}"><i class="fa fa-pencil icon"></i></a>
+            <a href="{% url 'main:book-delete' goal_pk=view.kwargs.goal_pk book_pk=object.pk %}"><i class="fa fa-trash-o icon"></i></a>
+        </h1>
+    </div>
+    <div class="row description col-md-6 col-md-offset-3 date">{{ object.created }}</div>
+    <div class="row description col-md-6 col-md-offset-3">
+        {{ object.description }}
+    </div>
+{% endblock %}

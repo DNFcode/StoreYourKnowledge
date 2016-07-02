@@ -23,7 +23,7 @@ class PermissionsMixin(object):
 
 class GoalPermissionMixin(PermissionsMixin):
     def get_permission_object(self):
-        if self.object.__class__ is Goal:
+        if getattr(self, 'object', None).__class__ is Goal:
             return self.object
         else:
             assert self.kwargs['goal_pk']
@@ -34,6 +34,27 @@ class GoalPermissionMixin(PermissionsMixin):
 
     def has_object_permission(self, request, obj):
         return self.permission_object.owner == request.user
+
+
+class SuccessUrlKwargsMixin(object):
+    """
+    A mixin that provides possibility to get 'success_url' by it's name and kwargs from request
+    :arg `success_url_name`: urlpattern name
+    :arg `url_kwarg`: list of kwargs from current request
+    """
+    success_url_name = None
+    url_kwargs = None
+
+    def get_success_url(self):
+        if self.success_url_name:
+            if self.url_kwargs:
+                kwargs = {kwarg:self.kwargs.get(kwarg) for kwarg in self.url_kwargs}
+                url = reverse(self.success_url_name, kwargs=kwargs)
+            else:
+                url = reverse(self.success_url_name)
+        else:
+            url = super(SuccessUrlKwargsMixin, self).get_success_url()
+        return url
 
 
 class BaseGoalChildListView(ListView, GoalPermissionMixin):
@@ -48,18 +69,15 @@ class BaseGoalChildDetailView(DetailView, GoalPermissionMixin):
     pass
 
 
-class BaseGoalChildCreateView(CreateView, GoalPermissionMixin):
+class BaseGoalChildCreateView(SuccessUrlKwargsMixin, CreateView, GoalPermissionMixin):
     def form_valid(self, form):
         form.instance.goal_id = self.kwargs['goal_pk']
         return super(BaseGoalChildCreateView, self).form_valid(form)
 
 
-class BaseGoalChildUpdateView(UpdateView, GoalPermissionMixin):
-    def dispatch(self, request, *args, **kwargs):
-        self.success_url = reverse('main:goal', kwargs={'goal_pk': self.kwargs['goal_pk'],
-                                                        self.pk_url_kwarg: self.kwargs[self.pk_url_kwarg]})
-        return super(BaseGoalChildUpdateView, self).dispatch(request, *args, **kwargs)
+class BaseGoalChildUpdateView(SuccessUrlKwargsMixin, UpdateView, GoalPermissionMixin):
+    pass
 
 
-class BaseGoalChildDeleteView(DeleteView, GoalPermissionMixin):
+class BaseGoalChildDeleteView(SuccessUrlKwargsMixin, DeleteView, GoalPermissionMixin):
     pass

@@ -8,7 +8,7 @@ from syk.apps.main.views_utils import BaseGoalChildCreateView, BaseGoalChildDele
     BaseGoalChildListView, BaseGoalChildDetailView
 
 
-# goals
+# goals views
 class HomeView(ListView):
     template_name = 'home.html'
 
@@ -56,7 +56,7 @@ class GoalDeleteView(DeleteView, GoalPermissionMixin):
     pk_url_kwarg = 'goal_pk'
 
 
-# books
+# books views
 class BookListView(BaseGoalChildListView):
     model = Book
     template_name = 'books.html'
@@ -64,11 +64,13 @@ class BookListView(BaseGoalChildListView):
 
 class BookDetailView(BaseGoalChildDetailView):
     model = Book
-    template_name = 'books.html'
+    template_name = 'book.html'
+    pk_url_kwarg = 'book_pk'
 
 
 class BookCreateView(BaseGoalChildCreateView):
-    success_url = reverse_lazy('main:books')
+    success_url_name = 'main:books'
+    url_kwargs = ['goal_pk']
     prefix = 'book'
     form_class = BookForm
     model = Book
@@ -76,6 +78,8 @@ class BookCreateView(BaseGoalChildCreateView):
 
 
 class BookUpdateView(BaseGoalChildUpdateView):
+    success_url_name = 'main:book'
+    url_kwargs = ['goal_pk', 'book_pk']
     prefix = 'book'
     form_class = BookForm
     model = Book
@@ -84,7 +88,11 @@ class BookUpdateView(BaseGoalChildUpdateView):
 
 
 class BookDeleteView(BaseGoalChildDeleteView):
-    success_url = reverse_lazy('main:books')
+    success_url_name = 'main:books'
+    url_kwargs = ['goal_pk']
     model = Book
     template_name = 'book_confirm_delete.html'
     pk_url_kwarg = 'book_pk'
+
+
+# notes views

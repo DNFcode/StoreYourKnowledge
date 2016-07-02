@@ -1,5 +1,6 @@
 from django.conf.urls import url, include
-from views import GoalCreateView, GoalUpdateView, HomeView, GoalView, GoalDeleteView
+from views import GoalCreateView, GoalUpdateView, HomeView, GoalView, GoalDeleteView,\
+    BookCreateView, BookDeleteView, BookDetailView, BookListView, BookUpdateView
 from django.views.generic import TemplateView
 
 app_name = 'main'
@@ -13,11 +14,11 @@ tasks_pattern = [
 ]
 
 books_pattern = [
-    # url(r'^books/$', TemplateView.as_view(template_name="books.html"), name='books'),
-    # url(r'^book/(?P<book_pk>\d+)$', View.as_view(), name='book'),
-    # url(r'^book/create$', View.as_view(), name='book-create'),
-    # url(r'^book/update/(?P<book_pk>\d+)$', View.as_view(), name='book-update'),
-    # url(r'^book/delete/(?P<book_pk>\d+)$', View.as_view(), name='book-delete'),
+    url(r'^books/$', BookListView.as_view(template_name="books.html"), name='books'),
+    url(r'^book/(?P<book_pk>\d+)$', BookDetailView.as_view(), name='book'),
+    url(r'^book/create$', BookCreateView.as_view(), name='book-create'),
+    url(r'^book/update/(?P<book_pk>\d+)$', BookUpdateView.as_view(), name='book-update'),
+    url(r'^book/delete/(?P<book_pk>\d+)$', BookDeleteView.as_view(), name='book-delete'),
 ]
 
 codes_pattern = [
@@ -45,6 +46,6 @@ urlpatterns = [
     url(r'^goal/update/(?P<goal_pk>\d+)$', GoalUpdateView.as_view(), name='goal-update'),
     url(r'^goal/delete/(?P<goal_pk>\d+)$', GoalDeleteView.as_view(), name='goal-delete'),
 
-    url(r'^goal/(?P<goal_pk>\d+)', include(tasks_pattern + books_pattern + notes_pattern + codes_pattern)),
+    url(r'^goal/(?P<goal_pk>\d+)/', include(tasks_pattern + books_pattern + notes_pattern + codes_pattern)),
 ]
 

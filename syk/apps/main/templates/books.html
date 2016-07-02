@@ -1,10 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "app_base.html" %}
+{% load static from staticfiles %}
 
-</body>
-</html>
+{% block head %}
+    <link href="{% static "css/home.css" %}" rel="stylesheet">
+    <link href="{% static "css/goal.css" %}" rel="stylesheet">
+    <link href="{% static "css/tasks.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block nav %}
+    {% include "nav_goal.html" with active="books" %}
+{% endblock %}
+
+{% block main-content %}
+    <div class="row text-center goals-header">
+        <h1 class="subject">
+            Redis
+{#                        {{ object.name }}#}
+        </h1>
+    </div>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+        <a href="{% url 'main:book-create' goal_pk=view.kwargs.goal_pk %}" class="btn bg-primary">Add book or article</a>
+            {% for book in object_list %}
+                <a href="{% url 'main:book' goal_pk=view.kwargs.goal_pk book_pk=book.pk %}">
+                    <div class="goal-child">
+                        <div class="goal-child-title">{{ book.name }}</div>
+                        <div class="goal-child-date">{{ book.created }}</div>
+                        <div class="goal-child-description">
+                            {{ book.description }}
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
