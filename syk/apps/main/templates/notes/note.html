@@ -1,0 +1,27 @@
+{% extends "app_base.html" %}
+{% load static from staticfiles %}
+{% load cleaner %}
+
+{% block head %}
+    <link href="{% static "css/home.css" %}" rel="stylesheet">
+    <link href="{% static "css/goal.css" %}" rel="stylesheet">
+    <link href="{% static "css/tasks.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block nav %}
+    {% include "nav_goal.html" with active="notes" %}
+{% endblock %}
+
+{% block main-content %}
+    <div class="row text-center goals-header">
+        <h3 class="subject">
+            <span class="subject-name">{{ object.title }}</span>
+            <a href="{% url 'main:note-update' goal_pk=view.kwargs.goal_pk note_pk=object.pk %}"><i class="fa fa-pencil icon"></i></a>
+            <a href="{% url 'main:note-delete' goal_pk=view.kwargs.goal_pk note_pk=object.pk %}"><i class="fa fa-trash-o icon"></i></a>
+        </h3>
+    </div>
+    <div class="row description col-md-6 col-md-offset-3 goal-child-date">{{ object.created }}</div>
+    <div class="row goal-child-description col-md-6 col-md-offset-3">
+        {{ note.text|clearhtml|safe }}
+    </div>
+{% endblock %}

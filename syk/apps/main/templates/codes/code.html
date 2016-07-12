@@ -1,0 +1,39 @@
+{% extends "app_base.html" %}
+{% load static from staticfiles %}
+{% load cleaner %}
+
+{% block head %}
+    <link href="{% static "css/home.css" %}" rel="stylesheet">
+    <link href="{% static "css/goal.css" %}" rel="stylesheet">
+    <link href="{% static "css/tasks.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block nav %}
+    {% include "nav_goal.html" with active="codes" %}
+{% endblock %}
+
+{% block main-content %}
+    <div class="row text-center goals-header">
+        <h1 class="subject">
+            <span class="subject-name">{{ object.title }}</span>
+            <a href="{% url 'main:code-update' goal_pk=view.kwargs.goal_pk code_pk=object.pk %}"><i class="fa fa-pencil icon"></i></a>
+            <a href="{% url 'main:code-delete' goal_pk=view.kwargs.goal_pk code_pk=object.pk %}"><i class="fa fa-trash-o icon"></i></a>
+        </h1>
+    </div>
+    <div class="row description col-md-6 col-md-offset-3 goal-child-date">{{ object.created }}</div>
+    <div class="row description col-md-6 col-md-offset-3">
+        {{ object.description|clearhtml|safe }}
+    </div>
+    <div class="row description col-md-6 col-md-offset-3">
+        Language: <span class="code-language">{{ object.language }}</span>
+    </div>
+    <div class="row description col-md-6 col-md-offset-3 code">
+        {{ object.code }}
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        require(['js/static_code']);
+    </script>
+{% endblock %}

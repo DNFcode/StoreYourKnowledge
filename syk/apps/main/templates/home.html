@@ -5,12 +5,6 @@
     <link href="{% static "css/home.css" %}" rel="stylesheet">
 {% endblock %}
 
-{% block scripts %}
-    <script src="{% static "js/goals.js" %}"></script>
-    <script src="{% static "js/home.js" %}"></script>
-    <script src="{% static "lib/progressbar.js/dist/progressbar.min.js" %}"></script>
-{% endblock %}
-
 {% block nav %}
     {% include "nav_home.html" with active="goals" %}
 {% endblock %}
@@ -30,4 +24,10 @@
     <div class="row text-center goals-add">
         <a href="{% url 'main:goal-create' %}" class="btn bg-primary">Add new goal</a>
     </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        require(['js/home']);
+    </script>
 {% endblock %}

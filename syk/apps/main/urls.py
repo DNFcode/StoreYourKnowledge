@@ -1,12 +1,14 @@
 from django.conf.urls import url, include
 from views import GoalCreateView, GoalUpdateView, HomeView, GoalView, GoalDeleteView,\
-    BookCreateView, BookDeleteView, BookDetailView, BookListView, BookUpdateView
+    BookCreateView, BookDeleteView, BookDetailView, BookListView, BookUpdateView, \
+    NoteCreateView, NoteDeleteView, NoteDetailView, NoteListView, NoteUpdateView, \
+    CodeCreateView, CodeDeleteView, CodeDetailView, CodeListView, CodeUpdateView
 from django.views.generic import TemplateView
 
 app_name = 'main'
 
 tasks_pattern = [
-    url(r'^tasks/$', TemplateView.as_view(template_name="tasks.html"), name='tasks'),
+    url(r'^tasks/$', TemplateView.as_view(), name='tasks'),
     # url(r'^task/(?P<task_pk>\d+)$', View.as_view(), name='task'),
     # url(r'^task/create$', View.as_view(), name='task-create'),
     # url(r'^task/update/(?P<task_pk>\d+)$', View.as_view(), name='task-update'),
@@ -14,7 +16,7 @@ tasks_pattern = [
 ]
 
 books_pattern = [
-    url(r'^books/$', BookListView.as_view(template_name="books.html"), name='books'),
+    url(r'^books/$', BookListView.as_view(), name='books'),
     url(r'^book/(?P<book_pk>\d+)$', BookDetailView.as_view(), name='book'),
     url(r'^book/create$', BookCreateView.as_view(), name='book-create'),
     url(r'^book/update/(?P<book_pk>\d+)$', BookUpdateView.as_view(), name='book-update'),
@@ -22,19 +24,19 @@ books_pattern = [
 ]
 
 codes_pattern = [
-    # url(r'^codes/$', TemplateView.as_view(template_name="codes.html"), name='codes'),
-    # url(r'^code/(?P<code_pk>\d+)$', View.as_view(), name='code'),
-    # url(r'^code/create$', View.as_view(), name='code-create'),
-    # url(r'^code/update/(?P<code_pk>\d+)$', View.as_view(), name='code-update'),
-    # url(r'^code/delete/(?P<code_pk>\d+)$', View.as_view(), name='code-delete'),
+    url(r'^codes/$', CodeListView.as_view(), name='codes'),
+    url(r'^code/(?P<code_pk>\d+)$', CodeDetailView.as_view(), name='code'),
+    url(r'^code/create$', CodeCreateView.as_view(), name='code-create'),
+    url(r'^code/update/(?P<code_pk>\d+)$', CodeUpdateView.as_view(), name='code-update'),
+    url(r'^code/delete/(?P<code_pk>\d+)$', CodeDeleteView.as_view(), name='code-delete'),
 ]
 
 notes_pattern = [
-    # url(r'^notes/$', TemplateView.as_view(template_name="notes.html"), name='notes'),
-    # url(r'^note/(?P<note_pk>\d+)$', View.as_view(), name='note'),
-    # url(r'^note/create$', View.as_view(), name='note-create'),
-    # url(r'^note/update/(?P<note_pk>\d+)$', View.as_view(), name='note-update'),
-    # url(r'^note/delete/(?P<note_pk>\d+)$', View.as_view(), name='note-delete'),
+    url(r'^notes/$', NoteListView.as_view(), name='notes'),
+    url(r'^note/(?P<note_pk>\d+)$', NoteDetailView.as_view(), name='note'),
+    url(r'^note/create$', NoteCreateView.as_view(), name='note-create'),
+    url(r'^note/update/(?P<note_pk>\d+)$', NoteUpdateView.as_view(), name='note-update'),
+    url(r'^note/delete/(?P<note_pk>\d+)$', NoteDeleteView.as_view(), name='note-delete'),
 ]
 
 urlpatterns = [

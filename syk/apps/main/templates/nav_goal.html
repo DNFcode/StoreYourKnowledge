@@ -8,10 +8,12 @@
            href="{% url 'main:tasks' goal_pk=view.kwargs.goal_pk %}">
             Tasks
         </a>
-        <a class="list-group-item {% if active == 'notes' %} active {% endif %}">
+        <a class="list-group-item {% if active == 'notes' %} active {% endif %}"
+            href="{% url 'main:notes' goal_pk=view.kwargs.goal_pk %}">
             Notes
         </a>
-        <a class="list-group-item {% if active == 'code_examples' %} active {% endif %}">
+        <a class="list-group-item {% if active == 'codes' %} active {% endif %}"
+            href="{% url 'main:codes' goal_pk=view.kwargs.goal_pk %}">
             Code examples
         </a>
         <a class="list-group-item {% if active == 'books' %} active {% endif %}"

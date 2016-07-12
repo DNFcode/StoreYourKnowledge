@@ -1,8 +1,8 @@
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 
-from forms import GoalForm, BookForm
-from models import Goal, Book
+from forms import GoalForm, BookForm, NoteForm, CodeExampleForm
+from models import Goal, Book, Note, CodeExample, Task
 from syk.apps.main.views_utils import GoalPermissionMixin
 from syk.apps.main.views_utils import BaseGoalChildCreateView, BaseGoalChildDeleteView, BaseGoalChildUpdateView, \
     BaseGoalChildListView, BaseGoalChildDetailView
@@ -20,7 +20,7 @@ class HomeView(ListView):
 
 
 class GoalView(DetailView, GoalPermissionMixin):
-    template_name = 'goal.html'
+    template_name = 'goals/goal.html'
     model = Goal
     pk_url_kwarg = 'goal_pk'
 
@@ -30,7 +30,7 @@ class GoalCreateView(CreateView):
     prefix = 'goal'
     form_class = GoalForm
     model = Goal
-    template_name = 'goal_create_form.html'
+    template_name = 'goals/goal_create_form.html'
 
     def form_valid(self, form):
         form.instance.owner = self.request.user
@@ -41,7 +41,7 @@ class GoalUpdateView(UpdateView, GoalPermissionMixin):
     prefix = 'goal'
     form_class = GoalForm
     model = Goal
-    template_name = 'goal_update_form.html'
+    template_name = 'goals/goal_update_form.html'
     pk_url_kwarg = 'goal_pk'
 
     def dispatch(self, request, *args, **kwargs):
@@ -52,19 +52,19 @@ class GoalUpdateView(UpdateView, GoalPermissionMixin):
 class GoalDeleteView(DeleteView, GoalPermissionMixin):
     success_url = reverse_lazy('main:home')
     model = Goal
-    template_name = 'goal_confirm_delete.html'
+    template_name = 'goals/goal_confirm_delete.html'
     pk_url_kwarg = 'goal_pk'
 
 
 # books views
 class BookListView(BaseGoalChildListView):
     model = Book
-    template_name = 'books.html'
+    template_name = 'books/books.html'
 
 
 class BookDetailView(BaseGoalChildDetailView):
     model = Book
-    template_name = 'book.html'
+    template_name = 'books/book.html'
     pk_url_kwarg = 'book_pk'
 
 
@@ -74,7 +74,7 @@ class BookCreateView(BaseGoalChildCreateView):
     prefix = 'book'
     form_class = BookForm
     model = Book
-    template_name = 'book_create_form.html'
+    template_name = 'books/book_create_form.html'
 
 
 class BookUpdateView(BaseGoalChildUpdateView):
@@ -83,7 +83,7 @@ class BookUpdateView(BaseGoalChildUpdateView):
     prefix = 'book'
     form_class = BookForm
     model = Book
-    template_name = 'book_update_form.html'
+    template_name = 'books/book_update_form.html'
     pk_url_kwarg = 'book_pk'
 
 
@@ -91,8 +91,83 @@ class BookDeleteView(BaseGoalChildDeleteView):
     success_url_name = 'main:books'
     url_kwargs = ['goal_pk']
     model = Book
-    template_name = 'book_confirm_delete.html'
+    template_name = 'books/book_confirm_delete.html'
     pk_url_kwarg = 'book_pk'
 
 
 # notes views
+class NoteListView(BaseGoalChildListView):
+    model = Note
+    template_name = 'notes/notes.html'
+
+
+class NoteDetailView(BaseGoalChildDetailView):
+    model = Note
+    template_name = 'notes/note.html'
+    pk_url_kwarg = 'note_pk'
+
+
+class NoteCreateView(BaseGoalChildCreateView):
+    success_url_name = 'main:notes'
+    url_kwargs = ['goal_pk']
+    prefix = 'note'
+    form_class = NoteForm
+    model = Note
+    template_name = 'notes/note_create_form.html'
+
+
+class NoteUpdateView(BaseGoalChildUpdateView):
+    success_url_name = 'main:note'
+    url_kwargs = ['goal_pk', 'note_pk']
+    prefix = 'note'
+    form_class = NoteForm
+    model = Note
+    template_name = 'notes/note_update_form.html'
+    pk_url_kwarg = 'note_pk'
+
+
+class NoteDeleteView(BaseGoalChildDeleteView):
+    success_url_name = 'main:notes'
+    url_kwargs = ['goal_pk']
+    model = Note
+    template_name = 'notes/note_confirm_delete.html'
+    pk_url_kwarg = 'note_pk'
+
+
+# codes views
+class CodeListView(BaseGoalChildListView):
+    model = CodeExample
+    template_name = 'codes/codes.html'
+
+
+class CodeDetailView(BaseGoalChildDetailView):
+    model = CodeExample
+    template_name = 'codes/code.html'
+    pk_url_kwarg = 'code_pk'
+
+
+class CodeCreateView(BaseGoalChildCreateView):
+    success_url_name = 'main:codes'
+    url_kwargs = ['goal_pk']
+    prefix = 'code'
+    form_class = CodeExampleForm
+    model = CodeExample
+    template_name = 'codes/code_create_form.html'
+
+
+class CodeUpdateView(BaseGoalChildUpdateView):
+    success_url_name = 'main:code'
+    url_kwargs = ['goal_pk', 'code_pk']
+    prefix = 'code'
+    form_class = CodeExampleForm
+    model = CodeExample
+    template_name = 'codes/code_update_form.html'
+    pk_url_kwarg = 'code_pk'
+
+
+class CodeDeleteView(BaseGoalChildDeleteView):
+    success_url_name = 'main:codes'
+    url_kwargs = ['goal_pk']
+    model = CodeExample
+    template_name = 'codes/code_confirm_delete.html'
+    pk_url_kwarg = 'code_pk'

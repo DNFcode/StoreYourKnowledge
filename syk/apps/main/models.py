@@ -55,6 +55,7 @@ class CodeExample(models.Model):
     created = models.DateField(auto_now_add=True)
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
+    language = models.CharField(max_length=100)
     code = models.TextField()
 
 

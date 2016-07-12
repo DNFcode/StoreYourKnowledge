@@ -21,3 +21,37 @@
 .goal-child-date{
     border-bottom: 1px solid #dddddd;
 }
+
+.goal-child-description{
+    margin-top: 10px;
+    font-size: 20px;
+    line-height: 25px;
+    font-weight: 300;
+}
+
+.goal-child-description a{
+    color: #2196f3;
+}
+
+.goal-child-description a:hover{
+    color: #2168f3;
+    text-decoration: underline;
+}
+
+.goal-child-btn{
+    margin-left: 10px;
+}
+
+.description a{
+    color: #2196f3;
+}
+
+.description a:hover{
+    color: #2168f3;
+    text-decoration: underline;
+}
+
+.code{
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}

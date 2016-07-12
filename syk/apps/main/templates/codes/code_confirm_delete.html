@@ -1,0 +1,27 @@
+{% extends "app_base.html" %}
+{% load crispy_forms_tags %}
+{% load static from staticfiles %}
+
+{% block head %}
+    <link href="{% static "css/home.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block nav %}
+    {% include "nav_goal.html" with active="codes" %}
+{% endblock %}
+
+{% block main-content %}
+    <div class="col-md-10">
+        <h2 class="text-center">Confirm delete</h2>
+        <form class="form-horizontal text-center" method="post">
+            {% csrf_token %}
+            <p class="col-md-12">Are you sure you want to delete this code example "{{ object.title }}"?</p>
+            <div class="controls col-md-12">
+                <input type="submit" name="submit" value="Delete" class="btn btn-danger">
+                <a href="{% url "main:code" goal_pk=view.kwargs.goal_pk code_pk=view.kwargs.code_pk %}">
+                    <input type="button" value="Back" class="btn btn-default">
+                </a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

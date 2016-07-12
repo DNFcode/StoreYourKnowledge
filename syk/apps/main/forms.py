@@ -36,4 +36,4 @@ class NoteForm(ModelForm, CrispyMixin):
 class CodeExampleForm(ModelForm, CrispyMixin):
     class Meta:
         model = CodeExample
-        fields = ['title', 'description', 'code']
+        fields = ['title', 'description', 'language', 'code']

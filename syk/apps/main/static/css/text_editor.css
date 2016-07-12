@@ -1,0 +1,8 @@
+#editor-toolbar{
+    border-bottom: 1px solid #ddd;
+    padding: 5px 15px;
+}
+
+#text-editor{
+    height: 250px;
+}

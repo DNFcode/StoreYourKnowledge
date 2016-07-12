@@ -1,4 +1,5 @@
 {% load static from staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,6 +44,40 @@
 
     <script src="{% static "lib/jquery/dist/jquery.min.js" %}"></script>
     <script src="{% static "lib/bootstrap/dist/js/bootstrap.min.js" %}"></script>
+    <script src="{% static "lib/requirejs/require.js" %}"></script>
+    <script>
+        requirejs.config({
+            baseUrl: '/static',
+            paths: {
+                "ace": "lib/ace/lib/ace",
+                "jquery": "lib/jquery/dist/jquery.min",
+                "autocomplete": "lib/javascript-auto-complete/auto-complete.min",
+                "quill": "lib/quill/dist/quill.min",
+                "progressbar": "lib/progressbar.js/dist/progressbar.min"
+            },
+            map: {
+              '*': {
+                'css': 'lib/require-css/css'
+              }
+            },
+            shim: {
+                "autocomplete": {
+                    exports: "autoComplete",
+                    deps: ['css!lib/javascript-auto-complete/auto-complete']
+                },
+                "progressbar": {
+                    exports: "ProgressBar"
+                },
+                "quill": {
+                    exports: "Quill",
+                    deps: [
+                        'css!lib/quill/dist/quill.base',
+                        'css!lib/quill/dist/quill.snow'
+                    ]
+                }
+            }
+        });
+    </script>
     {% block scripts %}{% endblock %}
 </body>
 </html>

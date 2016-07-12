@@ -6,12 +6,6 @@
     <link href="{% static "css/goal.css" %}" rel="stylesheet">
 {% endblock %}
 
-{% block scripts %}
-    <script src="{% static "js/goals.js" %}"></script>
-    <script src="{% static "js/goal.js" %}"></script>
-    <script src="{% static "lib/progressbar.js/dist/progressbar.min.js" %}"></script>
-{% endblock %}
-
 {% block nav %}
     {% include "nav_goal.html" with active="goal" %}
 {% endblock %}
@@ -63,4 +57,10 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        require(['js/goal']);
+    </script>
 {% endblock %}
