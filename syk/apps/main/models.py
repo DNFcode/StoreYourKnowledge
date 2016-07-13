@@ -16,38 +16,9 @@ class Goal(models.Model):
 class Task(models.Model):
     goal = models.ForeignKey(Goal)
     title = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
     is_done = models.BooleanField(default=False)
     created = models.DateField(auto_now_add=True)
-
-    CHOICES = (
-        ('CE', 'Code example'),
-        ('BK', 'Book'),
-        ('NR', 'Not related')
-    )
-    related_to = models.CharField(
-        max_length=2,
-        choices=CHOICES,
-        default='NR'
-    )
-
-    # Books and CodeExamples relation
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, blank=True, null=True)
-    object_id = models.PositiveIntegerField(blank=True, null=True)
-    content_object = GenericForeignKey('content_type', 'object_id')
-
-    # Override validation
-    def full_clean(self, *args, **kwargs):
-        super(Task, self).full_clean(*args, **kwargs)
-
-        permitted_models = {
-            'CE': CodeExample,
-            'BK': Book,
-            'NR': None
-        }
-        model = self.content_type.model_class() if self.content_type else None
-
-        if permitted_models[self.related_to] != model:
-            raise ValidationError('related_to and content_object are not matching')
 
 
 class CodeExample(models.Model):

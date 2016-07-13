@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block nav %}
-    {% include "nav_goal.html" with active="books" %}
+    {% include "nav_goal.html" with active="tasks" %}
 {% endblock %}
 
 {% block main-content %}
@@ -20,14 +20,14 @@
     </div>
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-        <a href="{% url 'main:book-create' goal_pk=view.kwargs.goal_pk %}" class="btn bg-primary goal-child-btn">Add book or article</a>
-            {% for book in object_list %}
-                <a href="{% url 'main:book' goal_pk=view.kwargs.goal_pk book_pk=book.pk %}">
-                    <div class="goal-child">
-                        <div class="goal-child-title">{{ book.name }}</div>
-                        <div class="goal-child-date">{{ book.created }}</div>
+        <a href="{% url 'main:task-create' goal_pk=view.kwargs.goal_pk %}" class="btn bg-primary goal-child-btn">Add task</a>
+            {% for task in object_list %}
+                <a href="{% url 'main:task' goal_pk=view.kwargs.goal_pk task_pk=task.pk %}">
+                    <div class="goal-child {% if task.is_done %}is_done{% else %}is_not_done{% endif %}">
+                        <div class="goal-child-title">{{ task.name }}</div>
+                        <div class="goal-child-date">{{ task.created }}</div>
                         <div class="description">
-                            {{ book.description|clearhtml|disablelinks|safe }}
+                            {{ task.description|clearhtml|disablelinks|safe }}
                         </div>
                     </div>
                 </a>

@@ -2,17 +2,18 @@ from django.conf.urls import url, include
 from views import GoalCreateView, GoalUpdateView, HomeView, GoalView, GoalDeleteView,\
     BookCreateView, BookDeleteView, BookDetailView, BookListView, BookUpdateView, \
     NoteCreateView, NoteDeleteView, NoteDetailView, NoteListView, NoteUpdateView, \
-    CodeCreateView, CodeDeleteView, CodeDetailView, CodeListView, CodeUpdateView
+    CodeCreateView, CodeDeleteView, CodeDetailView, CodeListView, CodeUpdateView, \
+    TaskCreateView, TaskDeleteView, TaskDetailView, TaskListView, TaskUpdateView
 from django.views.generic import TemplateView
 
 app_name = 'main'
 
 tasks_pattern = [
-    url(r'^tasks/$', TemplateView.as_view(), name='tasks'),
-    # url(r'^task/(?P<task_pk>\d+)$', View.as_view(), name='task'),
-    # url(r'^task/create$', View.as_view(), name='task-create'),
-    # url(r'^task/update/(?P<task_pk>\d+)$', View.as_view(), name='task-update'),
-    # url(r'^task/delete/(?P<task_pk>\d+)$', View.as_view(), name='task-delete'),
+    url(r'^tasks/$', TaskListView.as_view(), name='tasks'),
+    url(r'^task/(?P<task_pk>\d+)$', TaskDetailView.as_view(), name='task'),
+    url(r'^task/create$', TaskCreateView.as_view(), name='task-create'),
+    url(r'^task/update/(?P<task_pk>\d+)$', TaskUpdateView.as_view(), name='task-update'),
+    url(r'^task/delete/(?P<task_pk>\d+)$', TaskDeleteView.as_view(), name='task-delete'),
 ]
 
 books_pattern = [

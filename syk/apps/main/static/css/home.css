@@ -78,3 +78,30 @@ a:hover
 .padding-bottom{
     padding-bottom: 40px;
 }
+
+.goal-children-table td{
+    padding: 0 !important;
+}
+
+.goal-children-table a{
+    padding: 8px;
+    display: block;
+}
+
+.goal-children-table .is_done{
+    background-color: rgba(197,255,191,0.25);
+    transition: background-color 0.25s ease-out;
+}
+
+.goal-children-table .is_done:hover{
+    background-color: rgba(197,255,191,0.55);
+}
+
+.goal-children-table .is_not_done{
+    background-color: rgba(255, 144, 20, 0.15);
+    transition: background-color 0.25s ease-out;
+}
+
+.goal-children-table .is_not_done:hover{
+    background-color: rgba(255, 144, 20, 0.25);
+}

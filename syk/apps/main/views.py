@@ -1,7 +1,7 @@
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 
-from forms import GoalForm, BookForm, NoteForm, CodeExampleForm
+from forms import GoalForm, BookForm, NoteForm, CodeExampleForm, TaskForm
 from models import Goal, Book, Note, CodeExample, Task
 from syk.apps.main.views_utils import GoalPermissionMixin
 from syk.apps.main.views_utils import BaseGoalChildCreateView, BaseGoalChildDeleteView, BaseGoalChildUpdateView, \
@@ -23,6 +23,18 @@ class GoalView(DetailView, GoalPermissionMixin):
     template_name = 'goals/goal.html'
     model = Goal
     pk_url_kwarg = 'goal_pk'
+
+    def get_books(self):
+        return
+
+    def get_context_data(self, **kwargs):
+        context = {
+            'books': Book.objects.filter(goal_id=self.kwargs['goal_pk']),
+            'tasks': Task.objects.filter(goal_id=self.kwargs['goal_pk']),
+            'codes': CodeExample.objects.filter(goal_id=self.kwargs['goal_pk'])
+        }
+        context.update(kwargs)
+        return super(GoalView, self).get_context_data(**context)
 
 
 class GoalCreateView(CreateView):
@@ -171,3 +183,42 @@ class CodeDeleteView(BaseGoalChildDeleteView):
     model = CodeExample
     template_name = 'codes/code_confirm_delete.html'
     pk_url_kwarg = 'code_pk'
+
+
+# tasks views
+class TaskListView(BaseGoalChildListView):
+    model = Task
+    template_name = 'tasks/tasks.html'
+
+
+class TaskDetailView(BaseGoalChildDetailView):
+    model = Task
+    template_name = 'tasks/task.html'
+    pk_url_kwarg = 'task_pk'
+
+
+class TaskCreateView(BaseGoalChildCreateView):
+    success_url_name = 'main:tasks'
+    url_kwargs = ['goal_pk']
+    prefix = 'task'
+    form_class = TaskForm
+    model = Task
+    template_name = 'tasks/task_create_form.html'
+
+
+class TaskUpdateView(BaseGoalChildUpdateView):
+    success_url_name = 'main:task'
+    url_kwargs = ['goal_pk', 'task_pk']
+    prefix = 'task'
+    form_class = TaskForm
+    model = Task
+    template_name = 'tasks/task_update_form.html'
+    pk_url_kwarg = 'task_pk'
+
+
+class TaskDeleteView(BaseGoalChildDeleteView):
+    success_url_name = 'main:tasks'
+    url_kwargs = ['goal_pk']
+    model = Task
+    template_name = 'tasks/task_confirm_delete.html'
+    pk_url_kwarg = 'task_pk'

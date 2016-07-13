@@ -63,6 +63,13 @@ class BaseGoalChildListView(ListView, GoalPermissionMixin):
             return self.model.objects.filter(goal=self.get_permission_object())
         else:
             return super(BaseGoalChildListView, self).get_queryset()
+    
+    def get_context_data(self, **kwargs):
+        context = {
+            'goal': self.get_permission_object()
+        }
+        context.update(kwargs)
+        return super(BaseGoalChildListView, self).get_context_data(**context)
 
 
 class BaseGoalChildDetailView(DetailView, GoalPermissionMixin):
