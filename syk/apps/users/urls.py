@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from django.contrib.auth.views import login, logout
-from views import *
-from forms import UserAuthForm
+from .views import *
+from .forms import UserAuthForm
 from django.core.urlresolvers import reverse_lazy
 
 app_name = 'users'

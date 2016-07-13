@@ -2,7 +2,7 @@ from django.forms import ModelForm, Form
 from django.db.models import PositiveIntegerField
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit
-from models import Goal, Book, Note, CodeExample, Task
+from .models import Goal, Book, Note, CodeExample, Task
 
 
 class CrispyMixin(object):

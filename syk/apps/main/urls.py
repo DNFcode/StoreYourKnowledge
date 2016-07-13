@@ -1,5 +1,5 @@
 from django.conf.urls import url, include
-from views import GoalCreateView, GoalUpdateView, HomeView, GoalView, GoalDeleteView,\
+from .views import GoalCreateView, GoalUpdateView, HomeView, GoalView, GoalDeleteView,\
     BookCreateView, BookDeleteView, BookDetailView, BookListView, BookUpdateView, \
     NoteCreateView, NoteDeleteView, NoteDetailView, NoteListView, NoteUpdateView, \
     CodeCreateView, CodeDeleteView, CodeDetailView, CodeListView, CodeUpdateView, \

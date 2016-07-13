@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from forms import *
+from .forms import *
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 

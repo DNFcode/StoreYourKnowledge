@@ -1,8 +1,8 @@
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 
-from forms import GoalForm, BookForm, NoteForm, CodeExampleForm, TaskForm
-from models import Goal, Book, Note, CodeExample, Task
+from .forms import GoalForm, BookForm, NoteForm, CodeExampleForm, TaskForm
+from .models import Goal, Book, Note, CodeExample, Task
 from syk.apps.main.views_utils import GoalPermissionMixin
 from syk.apps.main.views_utils import BaseGoalChildCreateView, BaseGoalChildDeleteView, BaseGoalChildUpdateView, \
     BaseGoalChildListView, BaseGoalChildDetailView
