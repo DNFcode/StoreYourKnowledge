@@ -10,7 +10,7 @@ from django.core.exceptions import ValidationError
 class Goal(models.Model):
     owner = models.ForeignKey(User)
     name = models.CharField(max_length=100, help_text='Choose nice name for your new goal.')
-    description = models.TextField(help_text='Describe the main idea of your goal. Just for yourself.')
+    description = models.TextField(blank=True, help_text='Describe the main idea of your goal. Just for yourself.')
 
 
 class Task(models.Model):
