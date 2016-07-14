@@ -19,7 +19,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__) + "/.."))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
-ALLOWED_HOSTS = ['http://educate-yourself.website/']
+ALLOWED_HOSTS = ['educate-yourself.website']
 
 
 # Application definition
