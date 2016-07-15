@@ -1,7 +1,8 @@
 from .base import *
+import os
 
 DEBUG = False
 
-SECRET_KEY = open(os.path.abspath('/root/.secret-key-syk')).read().strip()
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 STATIC_ROOT = '/opt/static/'
