@@ -1,5 +1,6 @@
 {% extends "app_base.html" %}
 {% load static from staticfiles %}
+{% load tags %}
 
 {% block head %}
     <link href="{% static "css/home.css" %}" rel="stylesheet">
@@ -14,9 +15,12 @@
         <h1>Current goals</h1>
     </div>
     <div class="goals row text-center">
+        {% if not object_list %}
+
+        {% endif %}
         {% for goal in object_list %}
         <a class="goal-progress-bar col-md-3" href="{% url 'main:goal' goal_pk=goal.pk %}">
-            <div class="progress-bar-container">0.6</div>
+            <div class="progress-bar-container">{{ progress|keyvalue:goal.id }}</div>
             <div class="subject">{{ goal.name }}</div>
         </a>
         {% endfor %}

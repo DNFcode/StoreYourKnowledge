@@ -1,15 +1,16 @@
 <div class="col-md-2 left-sidebar fixed">
     <nav class="list-group list-smaller">
-        <a class="list-group-item {% if active == 'goals' %} active {% endif %}">
+        <a class="list-group-item {% if active == 'goals' %} active {% endif %}"
+            href="{% url 'main:home' %}">
             Goals
         </a>
-        <a class="list-group-item {% if active == 'statistics' %} active {% endif %}">
+        <a class="work-in-progress list-group-item {% if active == 'statistics' %} active {% endif %}">
             Statistics
         </a>
-        <a class="list-group-item {% if active == 'news' %} active {% endif %}">
+        <a class="work-in-progress list-group-item {% if active == 'news' %} active {% endif %}">
             News
         </a>
-        <a class="list-group-item {% if active == 'subscriptions' %} active {% endif %}">
+        <a class="work-in-progress list-group-item {% if active == 'subscriptions' %} active {% endif %}">
             Subscriptions
         </a>
     </nav>

@@ -17,8 +17,11 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.views.generic import TemplateView
 
+from .views import HomePageRedirectView
+
 urlpatterns = [
-    url(r'^$', TemplateView.as_view(template_name="index.html"), name="index"),
+    url(r'^$', HomePageRedirectView.as_view(), name='index'),
+    url(r'^welcome/$', TemplateView.as_view(template_name="index.html"), name="welcome"),
     url(r'^admin/', admin.site.urls),
     url(r'^users/', include('syk.apps.users.urls')),
     url(r'^app/', include('syk.apps.main.urls')),

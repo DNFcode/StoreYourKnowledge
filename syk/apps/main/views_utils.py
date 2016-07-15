@@ -8,6 +8,8 @@ from syk.apps.main.models import Goal
 
 
 class PermissionsMixin(object):
+    permission_object = None
+
     def has_object_permission(self, request, obj):
         return True
 

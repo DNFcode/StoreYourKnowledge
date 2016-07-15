@@ -105,3 +105,8 @@ a:hover
 .goal-children-table .is_not_done:hover{
     background-color: rgba(255, 144, 20, 0.25);
 }
+
+.work-in-progress{
+    background-color: #e6e6e6 !important;
+    cursor: default !important;
+}

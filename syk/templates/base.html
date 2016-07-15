@@ -9,14 +9,14 @@
     <link href="{% static "lib/bootstrap/dist/css/bootstrap.min.css" %}" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     {% block head %}{% endblock %}
-    <title>{% block title %}Store your knowledge{% endblock %}</title>
+    <title>{% block title %}Educate Yourself{% endblock %}</title>
 </head>
 
 <body>
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="{% block navbar-container %}container{% endblock %}">
             <div class="navbar-header">
-                <a href="{% url 'index' %}" class="navbar-brand">Store Your Knowledge</a>
+                <a href="{% url 'index' %}" class="navbar-brand">Educate Yourself</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">

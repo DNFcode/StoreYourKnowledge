@@ -5,7 +5,7 @@ from .forms import GoalForm, BookForm, NoteForm, CodeExampleForm, TaskForm
 from .models import Goal, Book, Note, CodeExample, Task
 from syk.apps.main.views_utils import GoalPermissionMixin
 from syk.apps.main.views_utils import BaseGoalChildCreateView, BaseGoalChildDeleteView, BaseGoalChildUpdateView, \
-    BaseGoalChildListView, BaseGoalChildDetailView
+    BaseGoalChildListView, BaseGoalChildDetailView, SuccessUrlKwargsMixin
 
 
 # goals views
@@ -18,14 +18,25 @@ class HomeView(ListView):
         else:
             return super(HomeView, self).get_queryset()
 
+    def get_context_data(self, **kwargs):
+        """
+        adding to context progress for goals
+        """
+        goals = self.get_queryset().prefetch_related('task_set')
+        progress = {}
+
+        for goal in goals:
+            done = sum([task.is_done for task in goal.task_set.all()])
+            progress[goal.pk] = done/(len(goal.task_set.all()) or 1)
+
+        kwargs.update({'progress': progress})
+        return super(HomeView, self).get_context_data(**kwargs)
+
 
 class GoalView(DetailView, GoalPermissionMixin):
     template_name = 'goals/goal.html'
     model = Goal
     pk_url_kwarg = 'goal_pk'
-
-    def get_books(self):
-        return
 
     def get_context_data(self, **kwargs):
         context = {
@@ -49,16 +60,14 @@ class GoalCreateView(CreateView):
         return super(GoalCreateView, self).form_valid(form)
 
 
-class GoalUpdateView(UpdateView, GoalPermissionMixin):
+class GoalUpdateView(SuccessUrlKwargsMixin, UpdateView, GoalPermissionMixin):
     prefix = 'goal'
     form_class = GoalForm
     model = Goal
     template_name = 'goals/goal_update_form.html'
     pk_url_kwarg = 'goal_pk'
-
-    def dispatch(self, request, *args, **kwargs):
-        self.success_url = reverse('main:goal', kwargs={'goal_pk': self.kwargs['goal_pk']})
-        return super(GoalUpdateView, self).dispatch(request, *args, **kwargs)
+    success_url_name = 'main:goal'
+    url_kwargs = ['goal_pk']
 
 
 class GoalDeleteView(DeleteView, GoalPermissionMixin):
