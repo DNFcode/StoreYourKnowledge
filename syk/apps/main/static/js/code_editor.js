@@ -1,4 +1,4 @@
-define([ 'jquery', 'ace/ace', 'ace/ext/modelist', 'autocomplete', 'css!css/code_editor'],
+define([ 'jquery', 'ace/ace', 'ace/ext/modelist', 'autocomplete', 'css!style/code_editor'],
     function($, ace, modelist, autoComplete){
 
 var editor_id_end = ['code'];

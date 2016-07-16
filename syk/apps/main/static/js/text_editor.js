@@ -1,4 +1,4 @@
-define(['jquery', 'quill', 'css!css/text_editor'],
+define(['jquery', 'quill', 'css!style/text_editor'],
     function( $, Quill) {
 
 var ids_end = ['description', 'text'];

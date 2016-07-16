@@ -42,7 +42,6 @@
     </div>
     {% block content %}{% endblock %}
 
-    <script src="{% static "lib/jquery/dist/jquery.min.js" %}"></script>
     <script src="{% static "lib/bootstrap/dist/js/bootstrap.min.js" %}"></script>
     <script src="{% static "lib/requirejs/require.js" %}"></script>
     <script>
@@ -57,7 +56,8 @@
             },
             map: {
               '*': {
-                'css': 'lib/require-css/css'
+                'css': 'lib/require-css/css',
+                'style': '/static/css'
               }
             },
             shim: {
