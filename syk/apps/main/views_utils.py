@@ -1,10 +1,14 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseForbidden, Http404
-from django.views.generic import CreateView, UpdateView, DeleteView, TemplateView, ListView, DetailView
-from django.views.generic.detail import SingleObjectMixin
+from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 
 from syk.apps.main.models import Goal
+
+
+def calculate_goal_progress(tasks):
+    done = sum([task.is_done for task in tasks])
+    return done/(len(tasks) or 1)
 
 
 class PermissionsMixin(object):

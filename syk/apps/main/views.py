@@ -1,11 +1,11 @@
-from django.core.urlresolvers import reverse_lazy, reverse
+from django.core.urlresolvers import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 
 from .forms import GoalForm, BookForm, NoteForm, CodeExampleForm, TaskForm
 from .models import Goal, Book, Note, CodeExample, Task
 from syk.apps.main.views_utils import GoalPermissionMixin
 from syk.apps.main.views_utils import BaseGoalChildCreateView, BaseGoalChildDeleteView, BaseGoalChildUpdateView, \
-    BaseGoalChildListView, BaseGoalChildDetailView, SuccessUrlKwargsMixin
+    BaseGoalChildListView, BaseGoalChildDetailView, SuccessUrlKwargsMixin, calculate_goal_progress
 
 
 # goals views
@@ -26,8 +26,7 @@ class HomeView(ListView):
         progress = {}
 
         for goal in goals:
-            done = sum([task.is_done for task in goal.task_set.all()])
-            progress[goal.pk] = done/(len(goal.task_set.all()) or 1)
+            progress[goal.pk] = calculate_goal_progress(goal.task_set.all())
 
         kwargs.update({'progress': progress})
         return super(HomeView, self).get_context_data(**kwargs)
@@ -39,11 +38,14 @@ class GoalView(DetailView, GoalPermissionMixin):
     pk_url_kwarg = 'goal_pk'
 
     def get_context_data(self, **kwargs):
+        goal_id = self.kwargs['goal_pk']
         context = {
-            'books': Book.objects.filter(goal_id=self.kwargs['goal_pk']),
-            'tasks': Task.objects.filter(goal_id=self.kwargs['goal_pk']),
-            'codes': CodeExample.objects.filter(goal_id=self.kwargs['goal_pk'])
+            'books': Book.objects.filter(goal_id=goal_id),
+            'tasks': Task.objects.filter(goal_id=goal_id),
+            'codes': CodeExample.objects.filter(goal_id=goal_id)
         }
+        context['progress'] = calculate_goal_progress(context['tasks'])
+
         context.update(kwargs)
         return super(GoalView, self).get_context_data(**context)
 
