@@ -32,7 +32,7 @@ class HomeView(ListView):
         return super(HomeView, self).get_context_data(**kwargs)
 
 
-class GoalView(DetailView, GoalPermissionMixin):
+class GoalView(GoalPermissionMixin, DetailView):
     template_name = 'goals/goal.html'
     model = Goal
     pk_url_kwarg = 'goal_pk'
@@ -62,7 +62,7 @@ class GoalCreateView(CreateView):
         return super(GoalCreateView, self).form_valid(form)
 
 
-class GoalUpdateView(SuccessUrlKwargsMixin, UpdateView, GoalPermissionMixin):
+class GoalUpdateView(GoalPermissionMixin, SuccessUrlKwargsMixin, UpdateView):
     prefix = 'goal'
     form_class = GoalForm
     model = Goal
@@ -72,7 +72,7 @@ class GoalUpdateView(SuccessUrlKwargsMixin, UpdateView, GoalPermissionMixin):
     url_kwargs = ['goal_pk']
 
 
-class GoalDeleteView(DeleteView, GoalPermissionMixin):
+class GoalDeleteView(GoalPermissionMixin, DeleteView):
     success_url = reverse_lazy('main:home')
     model = Goal
     template_name = 'goals/goal_confirm_delete.html'

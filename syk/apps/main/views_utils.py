@@ -22,9 +22,9 @@ class PermissionsMixin(object):
 
     def dispatch(self, request, *args, **kwargs):
         self.permission_object = self.get_permission_object()
-        if not self.has_object_permission(request, self.object):
+        if not self.has_object_permission(request, self.permission_object):
             return HttpResponseForbidden()
-        super(PermissionsMixin, self).dispatch(request, *args, **kwargs)
+        return super(PermissionsMixin, self).dispatch(request, *args, **kwargs)
 
 
 class GoalPermissionMixin(PermissionsMixin):
@@ -63,7 +63,7 @@ class SuccessUrlKwargsMixin(object):
         return url
 
 
-class BaseGoalChildListView(ListView, GoalPermissionMixin):
+class BaseGoalChildListView(GoalPermissionMixin, ListView):
     def get_queryset(self):
         if self.queryset is None:
             return self.model.objects.filter(goal=self.get_permission_object())
@@ -78,19 +78,19 @@ class BaseGoalChildListView(ListView, GoalPermissionMixin):
         return super(BaseGoalChildListView, self).get_context_data(**context)
 
 
-class BaseGoalChildDetailView(DetailView, GoalPermissionMixin):
+class BaseGoalChildDetailView(GoalPermissionMixin, DetailView):
     pass
 
 
-class BaseGoalChildCreateView(SuccessUrlKwargsMixin, CreateView, GoalPermissionMixin):
+class BaseGoalChildCreateView(GoalPermissionMixin, SuccessUrlKwargsMixin, CreateView):
     def form_valid(self, form):
         form.instance.goal_id = self.kwargs['goal_pk']
         return super(BaseGoalChildCreateView, self).form_valid(form)
 
 
-class BaseGoalChildUpdateView(SuccessUrlKwargsMixin, UpdateView, GoalPermissionMixin):
+class BaseGoalChildUpdateView(GoalPermissionMixin, SuccessUrlKwargsMixin, UpdateView):
     pass
 
 
-class BaseGoalChildDeleteView(SuccessUrlKwargsMixin, DeleteView, GoalPermissionMixin):
+class BaseGoalChildDeleteView(GoalPermissionMixin, SuccessUrlKwargsMixin, DeleteView):
     pass
