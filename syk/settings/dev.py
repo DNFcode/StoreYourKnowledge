@@ -8,5 +8,5 @@ if DEBUG:
     INTERNAL_IPS = ('10.0.2.2',)
 
     INSTALLED_APPS += (
-        'debug_toolbar',
+        # 'debug_toolbar',
     )

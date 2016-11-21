@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+
+{% block head %}
+    <link href="{% static "css/index.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <header class="index-header center">
+            <h2 class="color2-text text-weight-300">Improve Your Skills</h2>
+            <h3 class="text-weight-200">Learn programming your own way</h3>
+        </header>
+        <div class="row center">
+            <button class="btn-large waves-effect waves-light color2">Start right now</button>
+        </div>
+        <div class="main row">
+            <div class="col l4 center">
+                <h3><i class="fa fa-database color1-text icon"></i></h3>
+                <h5>Store things you've learned</h5>
+                <p>
+                    Create notes with useful information which you want to remember.
+                    Save different link, articles and books for further reading.
+                    Add code examples! You never know when you may need them.
+                </p>
+            </div>
+            <div class="col l4 center">
+                <h3><i class="fa fa-users color1-text icon"></i></h3>
+                <h5>Use others experience</h5>
+                <p>
+                    Search for tasks and notes from people who learned a lot already!
+                    Find helpful books and interesting code examples. Also you can contact
+                    anyone via online chat. Or even ask someone to be your tutor.
+                </p>
+            </div>
+            <div class="col l4 center">
+                <h3><i class="fa fa-trophy color1-text icon"></i></h3>
+                <h5>Achieve your goals</h5>
+                <p>
+                    Create tasks for yourself and other users. Complete your tasks and watch your progress.
+                    We will remind you if you will start to forget complete your tasks.
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -14,7 +14,7 @@ import os
 from django.core.urlresolvers import reverse_lazy
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__) + "/.."))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 # Quick-start development settings - unsuitable for production
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.google',
+    'webpack_loader',
 ]
 
 SITE_ID = 1
@@ -149,11 +150,15 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    ("js", "./syk/static/js"),
-    ("css", "./syk/static/css"),
-    ("img", "./syk/static/img"),
-    ("lib", "./syk/static/bower_components")
+    os.path.join(BASE_DIR, 'assets/bundles')
 ]
 
 LOGIN_REDIRECT_URL = reverse_lazy('main:home')
 LOGOUT_REDIRECT_URL = reverse_lazy('welcome')
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'bundles/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+    }
+}

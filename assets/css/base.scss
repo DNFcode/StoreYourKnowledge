@@ -1,0 +1,64 @@
+body{
+    background-color: rgba(42,118,154,0.02);
+}
+
+.nav-icon i{
+    font-size: 20px !important;
+}
+
+.transparent{
+    box-shadow: none;
+    background-color: transparent !important;
+}
+
+.color1{
+    background-color: #2A769A;
+}
+
+.color1-text{
+    color: #2A769A;
+}
+
+.color2{
+    background-color: #41C3BE ;
+}
+
+.color2-text{
+    color: #41C3BE !important;
+}
+
+.color2-text a{
+    color: #41C3BE !important;
+}
+
+.color3{
+    background-color: #F78536;
+}
+
+.color3-text{
+    color: #F78536;
+}
+
+.moved-right{
+    margin-left: 300px;
+}
+
+@media only screen and (max-width: 992px) {
+    .moved-right {
+        margin-left: 0;
+    }
+}
+
+.hidden{
+    display: none;
+}
+
+.title-nav{
+    height: 100%;
+}
+
+.navbar-title{
+    font-size: 48px;
+    line-height: 122px;
+}
+

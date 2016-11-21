@@ -1,40 +1,16 @@
-{% extends "base.html" %}
-{% load static from staticfiles %}
+{% load render_bundle from webpack_loader %}
+<!DOCTYPE html>
+<html>
+  <head>
+        <meta charset="UTF-8">
+        <title>Example</title>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{#        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">#}
+  </head>
 
-{% block head %}
-    <link href="{% static "css/index.css" %}" rel="stylesheet">
-{% endblock %}
+  <body>
+    <div id="react-app"></div>
 
-{% block content %}
-    <div class="info">
-        <header class="text-center">
-            <h2>Improve your skills</h2>
-        </header>
-        <div class="main container">
-            <div class="col-lg-4 col-sm-6 text-center fact">
-                <h3><i class="fa fa-database"></i></h3>
-                <p>Store things you've learned</p>
-            </div>
-            <div class="col-lg-4 col-sm-6 text-center fact">
-                <h3><i class="fa fa-users"></i></h3>
-                <p>Share your knowledge with others</p>
-            </div>
-            <div class="col-lg-4 col-sm-6 text-center fact">
-                <h3><i class="fa fa-trophy"></i></h3> 
-                <p>Create and achieve your goals</p>
-            </div>
-            <div class="col-lg-4 col-sm-6 text-center fact">
-                <h3><i class="fa fa-comments"></i></h3>
-                <p>Discuss problems and ask questions</p>
-            </div>
-            <div class="col-lg-4 col-sm-6 text-center fact">
-                <h3><i class="fa fa-code"></i></h3>
-                <p>Create and save code examples</p>
-            </div>
-            <div class="col-lg-4 col-sm-6 text-center fact">
-                <h3><i class="fa fa-book"></i></h3>  
-                <p>Create personal reading lists</p>
-            </div>
-        </div>
-    </div>
-{% endblock %}
+    <script src="/static/bundle.js"></script>
+  </body>
+</html>
