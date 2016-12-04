@@ -4,6 +4,10 @@
             href="{% url 'main:home' %}">
             Goals
         </a>
+        <a class="list-group-item {% if active == 'groups' %} active {% endif %}"
+            >
+            Groups
+        </a>
         <a class="work-in-progress list-group-item {% if active == 'statistics' %} active {% endif %}">
             Statistics
         </a>

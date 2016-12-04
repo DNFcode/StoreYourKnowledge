@@ -1,0 +1,28 @@
+{% extends "app_base.html" %}
+{% load static from staticfiles %}
+{% load cleaner %}
+
+{% block head %}
+    <link href="{% static "css/home.css" %}" rel="stylesheet">
+    <link href="{% static "css/goal.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block nav %}
+    {% include "nav_goal.html" with active="goal" %}
+{% endblock %}
+
+{% block main-content %}
+    <div class="row text-center goals-header">
+        <h1 class="subject">
+            <span class="subject-name">Groups</span>
+        </h1>
+    </div>
+    <div class="row">
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        require(['js/goal']);
+    </script>
+{% endblock %}

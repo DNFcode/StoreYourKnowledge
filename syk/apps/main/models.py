@@ -19,6 +19,15 @@ class Task(models.Model):
     description = models.TextField(blank=True)
     is_done = models.BooleanField(default=False)
     created = models.DateField(auto_now_add=True)
+    group_task = models.ForeignKey(GroupTask)
+
+
+class GroupTask(models.Model):
+    group = models.ForeignKey(Group)
+    title = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
+    deadline = models.DateField()
+    created = models.DateField(auto_now_add=True)
 
 
 class CodeExample(models.Model):
@@ -44,3 +53,8 @@ class Note(models.Model):
     created = models.DateField(auto_now_add=True)
     title = models.CharField(max_length=200)
     text = models.TextField()
+
+
+class Group(models.Model):
+    name = models.CharField(max_length=200)
+    users = models.ManyToManyField(User)
