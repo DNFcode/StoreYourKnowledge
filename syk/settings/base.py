@@ -102,10 +102,10 @@ WSGI_APPLICATION = 'syk.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'syk',
-        'USER': 'syk',
-        'PASSWORD': 'syk',
-        'HOST': '127.0.0.1',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'postgres+',
         'PORT': '5432',
     }
 }

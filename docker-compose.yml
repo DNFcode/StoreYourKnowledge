@@ -1,0 +1,31 @@
+version: '3'
+services:
+  postgres:
+    restart: always
+    image: postgres
+    ports:
+      - "5432:5432"
+
+  nginx:
+    restart: always
+    image: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./assets:/www/static
+    ports:
+      - "8080:80"
+    links:
+      - web:web
+
+  web:
+    restart: always
+    build:
+      context: ./
+      dockerfile: Dockerfile_django
+    command: sh entrypoint.sh
+    volumes:
+      - ./syk:/src/syk/
+    ports:
+      - "8000:8000"
+    links:
+      - postgres:postgres
