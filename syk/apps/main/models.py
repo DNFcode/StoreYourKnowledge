@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.core.exceptions import ValidationError
+from django.contrib.postgres.fields import ArrayField
 
 
 class Goal(models.Model):
@@ -13,21 +14,26 @@ class Goal(models.Model):
     description = models.TextField(blank=True, help_text='Describe the main idea of your goal. Just for yourself.')
 
 
+# class Group(models.Model):
+#     name = models.CharField(max_length=200)
+#     users = models.ManyToManyField(User)
+#
+#
+# class GroupTask(models.Model):
+#     group = models.ForeignKey(Group)
+#     title = models.CharField(max_length=200)
+#     description = models.TextField(blank=True)
+#     deadline = models.DateField()
+#     created = models.DateField(auto_now_add=True)
+
+
 class Task(models.Model):
     goal = models.ForeignKey(Goal)
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     is_done = models.BooleanField(default=False)
     created = models.DateField(auto_now_add=True)
-    group_task = models.ForeignKey(GroupTask)
-
-
-class GroupTask(models.Model):
-    group = models.ForeignKey(Group)
-    title = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
-    deadline = models.DateField()
-    created = models.DateField(auto_now_add=True)
+    # group_task = models.ForeignKey(GroupTask)
 
 
 class CodeExample(models.Model):
@@ -55,6 +61,13 @@ class Note(models.Model):
     text = models.TextField()
 
 
-class Group(models.Model):
-    name = models.CharField(max_length=200)
-    users = models.ManyToManyField(User)
+class MapVertex(models.Model):
+    title = models.CharField(max_length=200, unique=True)
+    hits = models.PositiveIntegerField()
+    connections = ArrayField(models.CharField(max_length=200))
+    parents = ArrayField(models.CharField(max_length=200))
+
+
+class MapEdge(models.Model):
+    vertexes = models.CharField(max_length=200, unique=True)
+    hits = models.PositiveIntegerField()

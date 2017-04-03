@@ -1,8 +1,10 @@
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
+import requests
+from bs4 import BeautifulSoup
 
 from .forms import GoalForm, BookForm, NoteForm, CodeExampleForm, TaskForm
-from .models import Goal, Book, Note, CodeExample, Task
+from .models import Goal, Book, Note, CodeExample, Task, MapVertex, MapEdge
 from syk.apps.main.views_utils import GoalPermissionMixin
 from syk.apps.main.views_utils import BaseGoalChildCreateView, BaseGoalChildDeleteView, BaseGoalChildUpdateView, \
     BaseGoalChildListView, BaseGoalChildDetailView, SuccessUrlKwargsMixin, calculate_goal_progress
@@ -233,3 +235,6 @@ class TaskDeleteView(BaseGoalChildDeleteView):
     model = Task
     template_name = 'tasks/task_confirm_delete.html'
     pk_url_kwarg = 'task_pk'
+
+
+def get_suggestions(request):
